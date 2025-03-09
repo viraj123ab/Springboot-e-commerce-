@@ -26,7 +26,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/signup", "/auth/login", "/auth/logout","/auth/user").permitAll() // ✅ Allow public access
+                        .requestMatchers("/auth/signup", "/auth/login", "/auth/logout","/auth/user","api/products","api/products/category/{category}","api/products/subcategory/{subcategory}","/api/products/{id}").permitAll() // ✅ Allow public access
                         .anyRequest().authenticated() // ⛔ Protect other endpoints
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
