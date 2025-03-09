@@ -1,17 +1,21 @@
 package com.example.chatapp.repository;
 
 import com.example.chatapp.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import java.util.List;
 
 public interface ProductRepository extends MongoRepository<Product, String> {
 
-    @Query("{ 'category': { $regex: ?0, $options: 'i' } }")  // ✅ Case-insensitive search
-    List<Product> findByCategoryIgnoreCase(String category);
+    // ✅ Case-insensitive category search with pagination
+    @Query("{ 'category': { $regex: ?0, $options: 'i' } }")
+    Page<Product> findByCategoryIgnoreCase(String category, Pageable pageable);
 
-    @Query("{ 'subcategory': { $regex: ?0, $options: 'i' } }")  // ✅ Case-insensitive search
-    List<Product> findBySubcategoryIgnoreCase(String subcategory);
+    // ✅ Case-insensitive subcategory search with pagination
+    @Query("{ 'subcategory': { $regex: ?0, $options: 'i' } }")
+    Page<Product> findBySubcategoryIgnoreCase(String subcategory, Pageable pageable);
 
-    List<Product> findTop10ByOrderByCreatedAtDesc();
+    // ✅ New arrivals with pagination
+    Page<Product> findByOrderByCreatedAtDesc(Pageable pageable);
 }
