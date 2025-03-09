@@ -46,4 +46,12 @@ public class ProductService {
         }
         return products;
     }
+
+    public List<Product> getNewArrivals() {
+        List<Product> products = productRepository.findTop10ByOrderByCreatedAtDesc();
+        if (products.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No new arrivals found.");
+        }
+        return products;
+    }
 }

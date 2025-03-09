@@ -12,4 +12,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     @Query("{ 'subcategory': { $regex: ?0, $options: 'i' } }")  // ✅ Case-insensitive search
     List<Product> findBySubcategoryIgnoreCase(String subcategory);
+
+    List<Product> findTop10ByOrderByCreatedAtDesc();
 }

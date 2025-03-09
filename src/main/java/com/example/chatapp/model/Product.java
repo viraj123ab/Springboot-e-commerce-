@@ -1,8 +1,11 @@
 package com.example.chatapp.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,6 +25,9 @@ public class Product {
     private int stock;
     private List<Variant> variants;
     private double avgRating;
+
+    @CreatedDate  // ✅ Automatically sets creation date
+    private Date createdAt;
 }
 
 @Getter

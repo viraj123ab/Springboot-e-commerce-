@@ -39,4 +39,9 @@ public class ProductController {
         List<Product> products = productService.getProductsBySubcategory(subcategory);
         return ResponseEntity.ok(products);
     }
+
+    @GetMapping("/new-arrivals")
+    public List<Product> getNewArrivals() {
+        return productService.getNewArrivals();
+    }
 }
